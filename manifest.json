@@ -1,0 +1,31 @@
+{
+  "manifest_version": 2,
+
+  "name": "Снимаем сами на карте",
+  "description": "Это расширение позволяет просматривать объявления на сайте snimaemsami.ru на карте",
+  "version": "1.0",
+  "icons": {"16": "icon_16x16.png",
+            "19": "icon_19x19.png",
+            "48": "icon_48x48.png",
+            "128": "icon_128x128.png"},
+
+  "content_scripts": [
+    {
+      "matches": ["http://snimaemsami.ru/*"],
+      "js": ["jquery-3.1.0.min.js", "content-script.js"]
+    }
+  ],
+
+  "browser_action": {
+    "default_title": "Объявления Снимаем сами на карте",
+    "default_icon": {
+      "19": "icon_19x19.png",
+      "38": "icon_38x38.png"
+    }
+  },
+  "web_accessible_resources": [
+    "mappagecontent.html",
+    "jquery.query-object.js",
+    "embedded-code.js"
+  ]
+}
