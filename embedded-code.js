@@ -24,7 +24,6 @@ function initializePageNumberForm()
 	{
 		pageNumber = 5;
 	}
-	$("#pageNumberNumerator").val(pageNumber);
 	$("#pageNumberForm").submit(function( event ) {
 	  window.location.search = jQuery.query.set("pageNumber", $("#pageNumberNumerator").val());
 	  event.preventDefault();
@@ -53,6 +52,8 @@ function addObjectToMap(link, name, address, price) {
   		myPlacemark = new ymaps.Placemark([coords.split(" ")[1], coords.split(" ")[0]],
         { balloonContentHeader: "<a href=\"" + link + "\">" + price + " " + name + "</a>" });
   		myMap.geoObjects.add(myPlacemark);
+  		processedAds+=1;
+  		updateProgress();
   	}
   });
 }
@@ -68,8 +69,15 @@ function handleAd(i, adLink)
 	});
 }
 
+function updateProgress()
+{
+	$("#current-ad-count").text(processedAds);
+}
+
 var pageNumber;
 var myMap;
+var processedAds = 0;
+
 initializeMap();
 initializePageNumberForm();
 
@@ -86,5 +94,6 @@ for (var i = 1; i <= pageNumber; i++) {
 		var page = jQuery.parseHTML(data);
 		var links = $(page).find(".inlist_object h3 a").map(function(){return this.href});
 		$(links).each(handleAd);
+		updateProgress();
 	});
 }

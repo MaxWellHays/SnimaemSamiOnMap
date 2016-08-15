@@ -12,7 +12,7 @@
   "content_scripts": [
     {
       "matches": ["http://snimaemsami.ru/*"],
-      "js": ["jquery-3.1.0.min.js", "content-script.js"]
+      "js": ["jquery-3.1.0.min.js", "jquery.query-object.js", "content-script.js"]
     }
   ],
 
@@ -26,6 +26,7 @@
   "web_accessible_resources": [
     "mappagecontent.html",
     "jquery.query-object.js",
-    "embedded-code.js"
+    "embedded-code.js",
+    "mappagestyle.css"
   ]
 }

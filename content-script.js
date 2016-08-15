@@ -18,6 +18,15 @@ function includeScript(scriptLocation)
 	(document.head || document.documentElement).appendChild(embeddedCode);
 }
 
+function includeStyle(styleLocation)
+{
+	var embeddedStyle = document.createElement("link");
+	embeddedStyle.rel = "stylesheet";
+	embeddedStyle.type = "text/css";
+	embeddedStyle.href =  styleLocation;
+	(document.head || document.documentElement).appendChild(embeddedStyle);
+}
+
 var isMapPage = window.location.href.lastIndexOf("http://snimaemsami.ru/map") === 0;
 var isObjectsPage = window.location.href.lastIndexOf("http://snimaemsami.ru/objects") === 0;
 
@@ -55,6 +64,8 @@ document.getElementById("menu").appendChild(mapMenuItem);
 
 if (isMapPage)
 {
+	includeStyle(chrome.extension.getURL("/mappagestyle.css"));
+
 	var middleContainer = document.getElementById("middle");
 	middleContainer.innerHTML = "";
 	document.title = "Объявления на карте";
@@ -65,9 +76,15 @@ if (isMapPage)
 		backLink.attr("href", "/objects?" + objectsRequest);
 		$(mappagecontent).appendTo("#middle");
 
+		pageNumber = $.query.get("pageNumber");
+		if (!pageNumber)
+		{
+			pageNumber = 5;
+		}
+		$(mappagecontent).find("#pageNumberNumerator").val(pageNumber);
+		$(mappagecontent).find("#total-ad-count").text(pageNumber*15);
+
 		includeScript(chrome.extension.getURL("/jquery.query-object.js"));
 		includeScript(chrome.extension.getURL("/embedded-code.js"));
 	});
-
-	$("")
 }

@@ -1,0 +1,14 @@
+#map-box{
+	margin-top:10px; 
+	background-color: #ffffee; 
+	height:80vh;
+}
+
+#map-loading-progress{
+  padding-left: 18px;
+  height: 20px;
+  margin-top: 10px;
+  background-image: url(http://snimaemsami.ru/images/lightbox-ico-loading.gif);
+  background-repeat: no-repeat;
+  background-size: 16px;
+}
